@@ -1,0 +1,25 @@
+from karel.stanfordkarel import *
+
+#inverts beepers
+def invert_beeper():
+    
+#checks if beeper is present
+    if beepers_present():
+#picks up beeper
+        pick_beeper()
+    else:
+#if no beepers are present put beeper
+        put_beeper()
+
+def main():
+#when the front is not blocked, invert the beeper and move forward
+    while front_is_clear():
+        invert_beeper()
+        move()
+    invert_beeper() # fence_post bug
+
+
+# There is no need to edit code beyond this point
+
+if __name__ == '__main__':
+    main()
