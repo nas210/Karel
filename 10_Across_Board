@@ -1,0 +1,20 @@
+
+from karel.stanfordkarel import *
+# places ten beepers
+def place_ten():
+    for i in range(10):
+        put_beeper()
+#checks if the front is clear then places 10 beepers and moves forward
+def across_board():
+    while front_is_clear():
+        place_ten()
+        move()
+    place_ten() #fence_post bug
+
+def main():
+    across_board()
+
+# There is no need to edit code beyond this point
+
+if __name__ == '__main__':
+    main()
