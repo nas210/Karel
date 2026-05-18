@@ -3,4 +3,4 @@
 <!-- python image -->
 
 ## What Is Karel
-Karel is an IDE used in 'Stanford Code-In-Place', an introductory course to python.
+Karel is an IDE used in 'Stanford Code-In-Place', an introductory course to python
