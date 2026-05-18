@@ -1,0 +1,19 @@
+from karel.stanfordkarel import *
+
+def pick_up_ten():
+    for i in range(10):
+        pick_beeper()
+
+def main():
+    move()
+    pick_up_ten()
+    move()
+    move()
+    pick_up_ten()
+    move()
+    move()
+    pick_up_ten()
+    move()
+
+if __name__ == '__main__':
+    main()
