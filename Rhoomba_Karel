@@ -1,0 +1,54 @@
+# This tells PyCharm who Karel is
+# Every Karel file has a line just like it
+from karel.stanfordkarel import *
+
+
+def main():
+#clears all beepers
+    rhoomba()
+
+def rhoomba():
+# clears all beepers in all rows
+    while left_is_clear():
+        clear_row()
+        reset_row()
+    clear_row()   
+ 
+def clear_row():
+#clears row
+#pre: at the begining of the left wall
+#post: at the end of the right wall
+    while front_is_clear():
+        move()
+        clear_square()
+
+def reset_row():
+# moves from end of right wall to end of left wall on unit up
+    turn_around()
+    move_to_wall()
+    turn_right()
+    move()
+    turn_right()
+    clear_square()
+
+def move_to_wall():
+    while front_is_clear():
+        move()
+    
+def clear_square():
+# checks if beepers are present and picks them up
+    if beepers_present():
+        pick_beeper()
+
+def turn_right():
+    for i in range(3):
+        turn_left()
+    
+def turn_around():
+    turn_left()
+    turn_left()
+
+# This is "boilerplate" code which launches your code
+# when you hit the run button
+if __name__ == '__main__':
+    main()
