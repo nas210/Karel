@@ -1,2 +1,1 @@
 # Karel
-<title>Karel</title>
