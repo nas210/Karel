@@ -1,0 +1,95 @@
+from karel.stanfordkarel import *
+
+"""
+File: main.py
+--------------------
+When you finish writing this file, Karel should be able to find
+the midpoint
+"""
+
+def main():
+#fills entire bottom row
+    fill_row()
+    turn_west()
+    move_wall()
+    turn_east()
+# picks beepers on corners
+    pick_beeper()
+    move_wall()
+    pick_beeper()
+    turn_around()
+    move()
+# finds midline
+    find_midpoint()
+
+
+def find_midpoint():
+# picks up beepers in the middle
+    while beepers_present():
+        filter_edges()
+    if not_facing_west():
+            turn_west()
+            move()
+            put_beeper()
+    else:
+        put_beeper()
+    turn_east()  
+"""
+The purpose of the if-else statement above is to
+correct the fact that the function "filter_edges"
+will remove the center beeper. In a row with an
+even number of spaces, karel will remove the final beeper
+and remain standing on the spot where the beeper
+will go. She will be facing WEST (important)
+if she is in a row with an odd number of spaces,
+she will be facing east and be on the spot one unit
+right from the center.
+THEREFORE: the if-else statement basically corrects
+the final part of the filter_edges functions for
+both an even and odd number of spaces
+"""
+
+# removes beepers on the edges
+def filter_edges():
+    while beepers_present():
+        move()
+    turn_around()
+    move()
+    pick_beeper()
+    move()    
+
+# moves to wall
+def move_wall():
+    while front_is_clear():
+        move()
+
+# fills row
+def fill_row():
+    while front_is_clear():
+        put_beeper()
+        move()
+    put_beeper()
+
+def turn_around():
+    for i in range(2):
+        turn_left()
+
+# cardinal movements
+def turn_north():
+    while not_facing_north():
+        turn_left()
+
+def turn_south():
+    while not_facing_south():
+        turn_left()
+
+def turn_east():
+    while not_facing_east():
+        turn_left()
+
+def turn_west():
+    while not_facing_west():
+        turn_left()
+
+if __name__ == '__main__':
+    main()
