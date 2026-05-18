@@ -1,0 +1,14 @@
+from karel.stanfordkarel import *
+# moves forward when karel is on a beeper
+def follow_path():
+    while beepers_present():
+        move()
+
+def main():
+    follow_path() # Karel finds path
+
+
+# There is no need to edit code beyond this point
+
+if __name__ == '__main__':
+    main()
