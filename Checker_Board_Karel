@@ -1,0 +1,133 @@
+from karel.stanfordkarel import *
+
+"""
+Karel should fill the whole world with beepers.
+"""
+
+
+def main():
+#the point of the if-else statement is to--
+#-- check if karel is in a space where she--
+#-- can only move in the {y} direction
+    if right_is_blocked():
+        if front_is_blocked():
+            while left_is_clear():
+                beeper_column()
+            return_column()
+# this is if karel needs to move in (x,y)
+        else:
+            while left_is_clear():
+                left_beeper_row()
+                step_up()
+                right_beeper_row()
+                step_up()
+            turn_south()
+            move()
+            if beepers_present():
+                step_up()
+                move()
+                if beepers_present():
+                    pass
+                else:
+                    return_row()
+                    right_beeper_row()
+            if no_beepers_present():
+                step_up()
+                if no_beepers_present():
+                    return_row()
+                    left_beeper_row()
+            return_to_beginning()
+
+# return to (1,1)
+def return_to_beginning():
+    turn_south()
+    move_to_wall()
+    turn_west()
+    move_to_wall()
+    turn_east()
+# place beepers in column
+
+def beeper_column():
+    turn_north()
+    put_beeper()
+    while front_is_clear():
+        move()
+        if front_is_clear():
+            move_put_beeper()
+
+# return column
+def return_column():
+    turn_south()
+    move_to_wall()
+    turn_east()
+
+# beeper row where the beeper touches the left wall
+def left_beeper_row():
+    put_beeper()
+    while front_is_clear():
+        move()
+        if front_is_clear():
+            move_put_beeper()
+    return_row()
+# moves up one row
+
+def step_up():
+    if left_is_clear():
+        turn_north()
+        move()
+        turn_east()
+
+# beeper row where the beeper touches the right wall
+def right_beeper_row():
+    move()
+    put_beeper()
+    while front_is_clear():
+        move()
+        if front_is_clear():
+            move_put_beeper()          
+    return_row()
+
+# turns around
+
+def turn_around():
+    for i in range(2):
+        turn_left()
+
+# return to left wall
+
+def return_row():
+    turn_west()
+    move_to_wall()
+    turn_east()
+
+# moves to the wall
+
+def move_to_wall():
+    while front_is_clear():
+        move()
+#moves and puts a beeper()
+
+def move_put_beeper():
+    move()
+    put_beeper()
+# cardinal movements
+
+def turn_north():
+    while not_facing_north():
+        turn_left()
+
+def turn_south():
+    while not_facing_south():
+        turn_left()
+
+def turn_east():
+    while not_facing_east():
+        turn_left()
+
+def turn_west():
+    while not_facing_west():
+        turn_left()
+
+# There is no need to edit code beyond this point
+if __name__ == '__main__':
+    main()
