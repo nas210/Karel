@@ -1,0 +1,75 @@
+from karel.stanfordkarel import *
+
+"""
+File: main.py
+--------------------
+When you finish writing this file, Karel should have repaired 
+each of the columns in the temple
+"""
+
+def main():
+    ascend()
+    build_column()
+    while front_is_clear():
+        move()
+        build_column()
+        
+#builds column
+#pre: top is blocked but front is clear, this is to make sure that karel is are the peak of the missing column
+def build_column():
+    if left_is_blocked():
+            if right_is_clear():
+                put_beeper()
+                turn_south()
+                while front_is_clear():
+                    move()
+                    put_beeper()
+                if left_is_clear():
+                    ascend()
+                else:
+                    turn_east()
+            else:
+                step_up()
+
+#ascends column
+def ascend():
+    turn_north()
+    move_to_wall()
+    turn_east()    
+# moves until front blocked
+#pre: front clear
+#post: front blocked
+def move_to_wall():
+    while front_is_clear():
+        move()
+
+
+#turns north
+def turn_north():
+    while not_facing_north():
+        turn_left()
+
+#turns south
+def turn_south():
+    while not_facing_south():
+        turn_left()
+
+#turns west
+def turn_west():
+    while not_facing_west():
+        turn_left()
+
+#turns east
+def turn_east():
+    while not_facing_east():
+        turn_left()
+
+#if karel is at the middle instead of the edge, she'll 'climb out' until she reaches the peak
+def step_up():
+    turn_south()
+    move()
+    turn_east()
+    move()
+
+if __name__ == '__main__':
+    main()
