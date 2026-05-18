@@ -1,0 +1,143 @@
+from karel.stanfordkarel import *
+import random
+"""PURPOSE OF THIS CODE: this is supposed to clear the board of all
+beepers, add my first inital 'N,' clear the board once again, add my final 
+inital 'A,' and then clear the board one final time"""
+
+def main():
+    initials()
+
+#builds initails N and A
+#pre:front and left clear
+#post: front and left clear
+def initials():
+    clear_board()
+    build_N()
+    clear_board()
+    build_A()
+    clear_board()
+
+#builds N
+def build_N():
+    straight_up()
+    turn_east()
+    diagonal()
+    pick_beeper()
+    straight_up()
+# builds A
+
+def build_A():
+    straight_up()
+    turn_east()
+    straight_across()
+    straight_down()
+    turn_north()
+    for i in range(5):
+        move()
+    turn_west()
+    straight_across()
+
+#straight down
+def straight_down():
+    turn_south()
+    while front_is_clear():
+        move()
+        if no_beepers_present():
+            put_beeper()
+
+#straight across
+def straight_across():
+    while front_is_clear():
+        move()
+        if no_beepers_present():
+            put_beeper()
+    
+#builds a diagonal of beepers
+def diagonal():
+    while front_is_clear():
+        move()
+        turn_south()
+        move()
+        turn_east()
+        if no_beepers_present():
+            put_beeper()
+
+# builds straight up
+def straight_up():
+    turn_north()
+    while front_is_clear():
+        put_beeper()
+        move()
+    put_beeper()
+
+#moves to wall
+def move_wall():
+    while front_is_clear():
+        move()
+
+def clear_board():
+#clears entire board
+    return_start()
+    while front_is_clear():
+        clear_row()
+        if left_is_clear():
+                if front_is_blocked():
+                    if beepers_present():
+                        pick_beeper()
+                    return_row()
+                    step_up()
+    if beepers_present():
+        pick_beeper()
+    return_start()   
+ 
+#takes karel to bottom left
+def return_start():
+    turn_east()
+    if front_is_clear():
+        move_wall()
+    if front_is_blocked():
+        turn_south()
+        move_wall()
+        turn_west()
+        move_wall()
+        turn_east()
+# clears row of beepers
+def clear_row():
+    while front_is_clear():
+        if beepers_present():
+            pick_beeper()
+        else:
+            move()      
+#returns to the left
+def return_row():
+    turn_west()
+    move_wall()
+    turn_east()
+#moves up one step and faces east
+def step_up():
+    turn_north()
+    move()
+    turn_east()
+
+
+#cardinal movements:
+def turn_north():
+    while not_facing_north():
+        turn_left()
+
+def turn_south():
+    while not_facing_south():
+        turn_left()
+
+def turn_east():
+    while not_facing_east():
+        turn_left()
+
+def turn_west():
+    while not_facing_west():
+        turn_left()
+
+
+# don't change this code
+if __name__ == '__main__':
+    main()
