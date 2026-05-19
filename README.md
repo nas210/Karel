@@ -9,5 +9,5 @@ Karel is an IDE used in 'Stanford Code-In-Place', an introductory course to Pyth
 
 The program assigns tasks involving problem solving, control flow, algorithims, and data analysis.
 
-In this repo I will show the ways I've solved rhe assignments.
+In this repo I will show the ways I've solved the assignments.
 (TO DATE)
